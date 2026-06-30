@@ -1,0 +1,49 @@
+{
+  "name": "diko-cafe-client",
+  "version": "1.0.0",
+  "description": "Cyber cafe client application",
+  "main": "dist/main.js",
+  "homepage": "./",
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-dev": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "npm run react-build && electron-builder",
+    "build": "npm run react-build",
+    "start": "electron-dev",
+    "dist": "npm run react-build && electron-builder --publish=never",
+    "prestart": "npm run build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "socket.io-client": "^4.6.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.0.0",
+    "wait-on": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.dikoclub.client",
+    "productName": "Diko Cafe Client",
+    "files": [
+      "dist/**/*",
+      "public/**/*",
+      "main.js"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
